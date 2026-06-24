@@ -44,12 +44,12 @@ Existing municipal complaint systems are **slow, fragmented, non-transparent**, 
 
 ```
 civicconnect/
-├── index.html          # Main application (single-page)
+├── index.html          ` Main application (single-page)
 ├── css/
-│   └── style.css       # All styling — responsive, accessible
+│   └── style.css       ~ All styling — responsive, accessible
 ├── js/
-│   ├── data.js         # AI routing engine, complaint data, utility functions
-│   └── app.js          # Application logic — tabs, upload, AI, modal, toast
+│   ├── data.js         ~ AI routing engine, complaint data, utility functions
+│   └── app.js          ~ Application logic — tabs, upload, AI, modal, toast
 └── README.md
 ```
 
@@ -61,7 +61,7 @@ civicconnect/
 Just open `index.html` in any modern browser. No server required.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/civicconnect-ai.git
+git clone https://github.com/nitesh5651mondal/civicconnect-ai.git
 cd civicconnect-ai
 open index.html   # macOS
 # or double-click index.html on Windows/Linux
@@ -75,7 +75,7 @@ open index.html   # macOS
 1. Push to GitHub
 2. Go to repo → **Settings → Pages**
 3. Set source to `main` branch, root `/`
-4. Your app is live at `https://YOUR_USERNAME.github.io/civicconnect-ai/`
+4. Your app is live at `https://nitesh5651mondal.github.io/civicconnect-ai/`
 
 ---
 
@@ -89,30 +89,9 @@ The AI routing system (`js/data.js`) uses a **keyword matching + scoring algorit
 4. **ETA estimation** — Department-specific expected resolution windows
 5. **Similar complaint clustering** — Random nearby report count (in production: geospatial query)
 
-**In production**, replace the keyword engine with a real Claude AI vision call:
+**In production**,
 
 ```javascript
-// Example: Claude Vision API for real image analysis
-const response = await fetch('https://api.anthropic.com/v1/messages', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'x-api-key': YOUR_API_KEY,
-    'anthropic-version': '2023-06-01'
-  },
-  body: JSON.stringify({
-    model: 'claude-opus-4-6',
-    max_tokens: 1024,
-    messages: [{
-      role: 'user',
-      content: [
-        { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: base64Image } },
-        { type: 'text', text: 'Identify this civic issue: pothole, streetlight, garbage, water_leak, sewage, tree, dumping, or other. Return JSON: { category, confidence, description }' }
-      ]
-    }]
-  })
-});
-```
 
 ---
 
@@ -157,7 +136,7 @@ const response = await fetch('https://api.anthropic.com/v1/messages', {
 Pull requests welcome! Please open an issue first to discuss what you'd like to change.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/civicconnect-ai.git
+git clone https://github.com/nitesh5651mondal/civicconnect-ai.git
 cd civicconnect-ai
 # Make your changes
 git commit -m "feat: add XYZ"
@@ -173,6 +152,8 @@ MIT License — free to use, modify, and distribute.
 ---
 
 ## 👤 Author
+
+~ Nitesh Mondal
 
 Built with ❤️ using HTML, CSS, JavaScript, and AI assistance.
 

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivicConnect AI — Report. Track. Resolve.</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        CivicConnect <span class="brand-ai">AI</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#report" class="nav-link active" data-tab="report">Report issue</a>
+        <a href="#track"  class="nav-link"        data-tab="track">Track complaints</a>
+        <a href="#dashboard" class="nav-link"     data-tab="dashboard">Dashboard</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#report"    class="mob-link" data-tab="report">Report issue</a>
+    <a href="#track"     class="mob-link" data-tab="track">Track complaints</a>
+    <a href="#dashboard" class="mob-link" data-tab="dashboard">Dashboard</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="heroSection">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">AI-powered civic reporting</div>
+      <h1 class="hero-title">Your city.<br>Your voice.<br><span class="hero-accent">Fixed faster.</span></h1>
+      <p class="hero-sub">Upload a photo. AI identifies the issue, routes it to the right department, and keeps you updated until it's resolved.</p>
+      <div class="hero-cta-row">
+        <a href="#report" class="btn-primary tab-trigger" data-tab="report">Report an issue</a>
+        <a href="#track"  class="btn-ghost  tab-trigger" data-tab="track">Track my complaint</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hstat-num">1,284</span><span class="hstat-lbl">Issues reported</span></div>
+        <div class="hero-stat"><span class="hstat-num">66%</span><span class="hstat-lbl">Resolved this month</span></div>
+        <div class="hero-stat"><span class="hstat-num">3.2d</span><span class="hstat-lbl">Avg resolution time</span></div>
+        <div class="hero-stat"><span class="hstat-num">94%</span><span class="hstat-lbl">AI routing accuracy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP TABS -->
+  <main class="main-app" id="mainApp">
+
+    <!-- TAB NAV -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="report">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        Report issue
+      </button>
+      <button class="tab-btn" data-tab="track">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        Track complaints
+      </button>
+      <button class="tab-btn" data-tab="dashboard">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+    </div>
+
+    <!-- ===================== REPORT TAB ===================== -->
+    <section class="tab-panel active" id="tab-report">
+      <div class="panel-header">
+        <h2>Report a civic issue</h2>
+        <p>Upload a photo and our AI will identify the problem, assign a department, and score its priority.</p>
+      </div>
+
+      <div class="report-layout">
+        <!-- UPLOAD ZONE -->
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-content" id="uploadContent">
+            <div class="upload-icon">
+              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            </div>
+            <p class="upload-title">Drag &amp; drop a photo here</p>
+            <p class="upload-sub">or click to browse — JPG, PNG, WEBP up to 10 MB</p>
+            <button class="btn-upload" id="uploadBtn">Choose photo</button>
+            <input type="file" id="fileInput" accept="image/*" hidden />
+          </div>
+          <div class="upload-preview" id="uploadPreview" style="display:none;">
+            <img id="previewImg" src="" alt="Uploaded issue photo" />
+            <button class="remove-photo" id="removePhoto" aria-label="Remove photo">✕</button>
+          </div>
+        </div>
+
+        <!-- FORM FIELDS -->
+        <div class="report-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="issueCategory">Issue category</label>
+              <select id="issueCategory">
+                <option value="">Select or let AI detect…</option>
+                <option value="pothole">Pothole / Road damage</option>
+                <option value="streetlight">Broken streetlight</option>
+                <option value="garbage">Garbage accumulation</option>
+                <option value="water">Water leakage</option>
+                <option value="sewage">Sewage overflow</option>
+                <option value="tree">Fallen tree / debris</option>
+                <option value="dumping">Illegal dumping</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="issueLocation">Location / Area</label>
+              <input type="text" id="issueLocation" placeholder="e.g. MG Road, near bus stand" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="issueDesc">Describe the problem</label>
+            <textarea id="issueDesc" rows="3" placeholder="e.g. Large pothole near the main junction — present for 2 weeks, causing accidents during rain…"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="issueSeverity">Your severity estimate</label>
+              <select id="issueSeverity">
+                <option value="">Select…</option>
+                <option value="low">Minor — inconvenient</option>
+                <option value="medium">Moderate — affects daily life</option>
+                <option value="high">High — safety risk</option>
+                <option value="critical">Critical — immediate danger</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="issuePhone">Contact number <span class="label-opt">(optional)</span></label>
+              <input type="tel" id="issuePhone" placeholder="+91 98765 43210" />
+            </div>
+          </div>
+
+          <button class="btn-analyze" id="analyzeBtn">
+            <span class="btn-icon">✦</span>
+            <span id="analyzeBtnText">Analyze with AI</span>
+          </button>
+
+          <!-- AI RESULT -->
+          <div class="ai-result" id="aiResult" style="display:none;">
+            <div class="ai-result-header">
+              <span class="ai-label">✦ AI analysis</span>
+              <span class="priority-badge" id="priorityBadge"></span>
+            </div>
+            <div class="ai-fields">
+              <div class="ai-field">
+                <span class="ai-field-label">Detected issue</span>
+                <span class="ai-field-value" id="aiIssueType">—</span>
+              </div>
+              <div class="ai-field">
+                <span class="ai-field-label">Assigned department</span>
+                <span class="ai-field-value" id="aiDept">—</span>
+              </div>
+              <div class="ai-field">
+                <span class="ai-field-label">Priority score</span>
+                <span class="ai-field-value" id="aiScore">—</span>
+              </div>
+              <div class="ai-field">
+                <span class="ai-field-label">Estimated resolution</span>
+                <span class="ai-field-value" id="aiEta">—</span>
+              </div>
+              <div class="ai-field">
+                <span class="ai-field-label">Similar nearby</span>
+                <span class="ai-field-value" id="aiSimilar">—</span>
+              </div>
+              <div class="ai-field">
+                <span class="ai-field-label">Confidence</span>
+                <span class="ai-field-value" id="aiConfidence">—</span>
+              </div>
+            </div>
+            <div class="ai-tip" id="aiTip"></div>
+            <div class="submit-row">
+              <button class="btn-ghost-sm" id="clearBtn">Clear form</button>
+              <button class="btn-primary-sm" id="submitBtn">Submit complaint →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRACK TAB ===================== -->
+    <section class="tab-panel" id="tab-track">
+      <div class="panel-header">
+        <h2>Track your complaints</h2>
+        <p>Search by complaint ID, area, or category. Click any complaint for full details.</p>
+      </div>
+
+      <div class="track-controls">
+        <div class="search-box">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="Search complaints…" />
+        </div>
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="progress">In progress</button>
+          <button class="filter-btn" data-filter="resolved">Resolved</button>
+        </div>
+      </div>
+
+      <div class="complaints-grid" id="complaintsGrid"></div>
+    </section>
+
+    <!-- ===================== DASHBOARD TAB ===================== -->
+    <section class="tab-panel" id="tab-dashboard">
+      <div class="panel-header">
+        <h2>City dashboard</h2>
+        <p>Real-time overview of civic issue reports, resolution rates, and AI insights.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">1,284</div>
+          <div class="stat-lbl">Total reports</div>
+          <div class="stat-delta positive">↑ 12% this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">847</div>
+          <div class="stat-lbl">Resolved</div>
+          <div class="stat-delta positive">↑ 66% resolution rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3.2d</div>
+          <div class="stat-lbl">Avg resolution time</div>
+          <div class="stat-delta positive">↓ 18% faster</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">94%</div>
+          <div class="stat-lbl">AI routing accuracy</div>
+          <div class="stat-delta neutral">Last 30 days</div>
+        </div>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3 class="chart-title">Issues by category</h3>
+          <div class="bar-chart" id="barChart"></div>
+        </div>
+        <div class="chart-card">
+          <h3 class="chart-title">Resolution status</h3>
+          <div class="donut-wrap">
+            <svg class="donut-svg" viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#e8f5ee" stroke-width="20"/>
+              <!-- resolved 66% -->
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#1D9E75" stroke-width="20"
+                stroke-dasharray="190 99" stroke-dashoffset="-24" />
+              <!-- in progress 24% -->
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#378ADD" stroke-width="20"
+                stroke-dasharray="69 220" stroke-dashoffset="-213" />
+              <!-- pending 10% -->
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#F4A92A" stroke-width="20"
+                stroke-dasharray="29 260" stroke-dashoffset="-282" />
+              <text x="60" y="55" text-anchor="middle" font-size="18" font-weight="600" fill="#1D9E75">66%</text>
+              <text x="60" y="69" text-anchor="middle" font-size="9" fill="#888">resolved</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="legend-row"><span class="leg-dot" style="background:#1D9E75"></span>Resolved <strong>847</strong></div>
+              <div class="legend-row"><span class="leg-dot" style="background:#378ADD"></span>In progress <strong>304</strong></div>
+              <div class="legend-row"><span class="leg-dot" style="background:#F4A92A"></span>Pending <strong>133</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-card">
+        <h3 class="chart-title">✦ AI-generated insights</h3>
+        <div class="insights-list">
+          <div class="insight-item">
+            <div class="insight-icon insight-warn">↑</div>
+            <div>
+              <div class="insight-text">Pothole complaints on NH-32 corridor are up 34% in 14 days — likely monsoon-related degradation.</div>
+              <div class="insight-sub">Suggest proactive inspection before peak rainfall season</div>
+            </div>
+          </div>
+          <div class="insight-item">
+            <div class="insight-icon insight-info">⧗</div>
+            <div>
+              <div class="insight-text">Ward 7 streetlight complaints average 6.1 days to resolve — 90% above city average.</div>
+              <div class="insight-sub">Escalate to Electrical Department supervisor for immediate review</div>
+            </div>
+          </div>
+          <div class="insight-item">
+            <div class="insight-icon insight-ok">✓</div>
+            <div>
+              <div class="insight-text">Garbage collection complaints dropped 41% after route optimization last quarter.</div>
+              <div class="insight-sub">Apply same AI model to southern zones for similar gains</div>
+            </div>
+          </div>
+          <div class="insight-item">
+            <div class="insight-icon insight-warn">!</div>
+            <div>
+              <div class="insight-text">3 water leak reports in Civil Lines within 500m — possible main pipeline fault.</div>
+              <div class="insight-sub">JWSSB inspection team should assess for a single root cause</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- COMPLAINT DETAIL MODAL -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none;">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="brand">CivicConnect AI</span>
+      <span class="footer-copy">Built with AI · Open source on <a href="https://github.com" target="_blank" rel="noopener">GitHub</a></span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
